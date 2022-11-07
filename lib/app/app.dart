@@ -6,16 +6,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // Application name
       title: 'Pool Pass',
       // Application theme data, you can set the colors for the application as
       // you want
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme:
+          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 66, 170, 255)),
       // A widget which will be started on application startup
       home: HomePage(),
     );
   }
 }
-
