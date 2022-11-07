@@ -29,6 +29,7 @@ class UsageIndicator extends StatelessWidget {
             const SizedBox(height: 5),
             Wrap(
               spacing: 5,
+              runSpacing: 5,
               children: [
                 for (int ticket = 1; ticket <= tickets; ticket++)
                   Ticket(
@@ -52,7 +53,6 @@ class Ticket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 5, bottom: 5),
       width: 30,
       height: 30,
       decoration: const BoxDecoration(
