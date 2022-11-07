@@ -30,9 +30,9 @@ class UsageIndicator extends StatelessWidget {
             Wrap(
               spacing: 5,
               children: [
-                for (int i = 1; i <= tickets; i++)
+                for (int ticket = 1; ticket <= tickets; ticket++)
                   Ticket(
-                    number: i.toString(),
+                    number: ticket.toString(),
                   )
               ],
             ),
