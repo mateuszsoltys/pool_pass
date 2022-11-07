@@ -13,7 +13,12 @@ class HomePage extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        UsageIndicator(passName: 'ajnc', tickets: 22)
+        UsageIndicator(
+          passName: 'ajnc',
+          tickets: 1,
+          passDate: '22.12.2022',
+          passRemainingTime: 'nie wiem',
+        )
       ],
     )));
   }

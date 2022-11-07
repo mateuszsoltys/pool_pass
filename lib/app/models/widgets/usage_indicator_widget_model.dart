@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class UsageIndicator extends StatelessWidget {
   final String passName;
   final int tickets;
+  final String passDate;
+  final String passRemainingTime;
 
   const UsageIndicator({
     Key? key,
     required this.passName,
     required this.tickets,
+    required this.passDate,
+    required this.passRemainingTime,
   }) : super(key: key);
 
   @override
@@ -25,6 +29,17 @@ class UsageIndicator extends StatelessWidget {
               passName.toUpperCase(),
               style: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'WAŻNY DO: $passDate',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text('POZOSTAŁO: $passRemainingTime',
+                    style: const TextStyle(color: Colors.white))
+              ],
             ),
             const SizedBox(height: 5),
             Wrap(
