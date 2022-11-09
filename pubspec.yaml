@@ -20,6 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  intl: ^0.17.0
+  ndialog: ^4.2.0
+  numberpicker: ^2.1.1
 
 dev_dependencies:
   flutter_test:
