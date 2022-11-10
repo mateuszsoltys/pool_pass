@@ -23,6 +23,5 @@ class CoreCubit extends Cubit<CoreState> {
 
   Future<void> setMonthPickerValue(val) async {
     emit(state.copyWith(monthPickerValue: val));
-    print(state.monthPickerValue);
   }
 }

@@ -52,7 +52,6 @@ class HomePage extends StatelessWidget {
                         actualDate: core.today, pickedDate: core.pickedDate),
                     const SizedBox(height: 2),
                     TakeValidityWidgetModel(
-                        pickerValue: core.monthPickerValue,
                         onChanged:
                             context.read<CoreCubit>().setMonthPickerValue)
                   ],
