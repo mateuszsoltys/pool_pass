@@ -40,11 +40,14 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     NewPassInputWidget(
+                      onChanged: context.read<CoreCubit>().setPassName,
                       label: 'nazwa',
                       keyboardType: TextInputType.text,
                     ),
                     const SizedBox(height: 2),
                     NewPassInputWidget(
+                        onChanged:
+                            context.read<CoreCubit>().setPassNumberTickets,
                         label: 'ilość wejść',
                         keyboardType: TextInputType.number),
                     const SizedBox(height: 2),

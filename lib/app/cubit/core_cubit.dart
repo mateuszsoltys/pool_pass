@@ -24,4 +24,13 @@ class CoreCubit extends Cubit<CoreState> {
   Future<void> setMonthPickerValue(val) async {
     emit(state.copyWith(monthPickerValue: val));
   }
+
+  Future<void> setPassName(val) async {
+    emit(state.copyWith(passName: val));
+  }
+
+  Future<void> setPassNumberTickets(val) async {
+    int _nuberTickets = int.parse(val);
+    emit(state.copyWith(ticketsNumber: _nuberTickets));
+  }
 }

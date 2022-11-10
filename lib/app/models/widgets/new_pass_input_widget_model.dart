@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 class NewPassInputWidget extends StatelessWidget {
   final String label;
   final TextInputType keyboardType;
-
+  final Function onChanged;
   NewPassInputWidget({
     Key? key,
     required this.label,
     required this.keyboardType,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -16,6 +17,9 @@ class NewPassInputWidget extends StatelessWidget {
     return SizedBox(
       width: 200,
       child: TextFormField(
+        onChanged: (val) {
+          onChanged.call(val);
+        },
         keyboardType: keyboardType,
         textAlign: TextAlign.center,
         decoration: InputDecoration(
