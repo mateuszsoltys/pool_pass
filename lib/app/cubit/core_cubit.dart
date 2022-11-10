@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 part 'core_state.dart';
@@ -32,5 +33,21 @@ class CoreCubit extends Cubit<CoreState> {
   Future<void> setPassNumberTickets(val) async {
     int _nuberTickets = int.parse(val);
     emit(state.copyWith(ticketsNumber: _nuberTickets));
+  }
+
+  Future<void> setNewDate(BuildContext context) async {
+    DateTime _date = state.today;
+    DateTime _firstDate = DateTime(_date.year - 2, _date.month, _date.day);
+    DateTime _lastDate = DateTime(_date.year + 3, _date.month, _date.day);
+    DateTime? _pickedDate = await showDatePicker(
+        context: context,
+        initialDate: _date,
+        firstDate: _firstDate,
+        lastDate: _lastDate,
+        locale: const Locale('pl'));
+
+    if (_pickedDate != null && _pickedDate != _date) {
+      emit(state.copyWith(pickedDate: _pickedDate));
+    }
   }
 }

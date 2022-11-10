@@ -23,6 +23,8 @@ dependencies:
   intl: ^0.17.0
   ndialog: ^4.2.0
   numberpicker: ^2.1.1
+  flutter_localizations: 
+    sdk: flutter         
 
 dev_dependencies:
   flutter_test:

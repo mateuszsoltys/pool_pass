@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -5,10 +6,10 @@ class TakeDateWidget extends StatelessWidget {
   TakeDateWidget({
     Key? key,
     required this.pickedDate,
-    required this.actualDate,
+    required this.setDate,
   }) : super(key: key);
   final DateTime pickedDate;
-  final DateTime actualDate;
+  final Function setDate;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,7 @@ class TakeDateWidget extends StatelessWidget {
               Text(DateFormat('dd-MM-yyyy').format(pickedDate)),
               IconButton(
                   onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: actualDate,
-                      firstDate: DateTime(2021),
-                      lastDate: DateTime(2030),
-                    );
+                    setDate.call(context);
                   },
                   icon: const Icon(Icons.calendar_month_outlined)),
             ],

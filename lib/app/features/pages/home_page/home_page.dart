@@ -52,7 +52,8 @@ class HomePage extends StatelessWidget {
                         keyboardType: TextInputType.number),
                     const SizedBox(height: 2),
                     TakeDateWidget(
-                        actualDate: core.today, pickedDate: core.pickedDate),
+                        setDate: context.read<CoreCubit>().setNewDate,
+                        pickedDate: core.pickedDate),
                     const SizedBox(height: 2),
                     TakeValidityWidgetModel(
                         onChanged:
