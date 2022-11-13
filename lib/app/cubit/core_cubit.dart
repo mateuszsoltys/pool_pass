@@ -41,7 +41,7 @@ class CoreCubit extends Cubit<CoreState> {
     DateTime _lastDate = DateTime(_date.year + 3, _date.month, _date.day);
     DateTime? _pickedDate = await showDatePicker(
         context: context,
-        initialDate: _date,
+        initialDate: state.pickedDate,
         firstDate: _firstDate,
         lastDate: _lastDate,
         locale: const Locale('pl'));
