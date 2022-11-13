@@ -3,8 +3,8 @@ part of 'core_cubit.dart';
 
 @immutable
 class CoreState {
-  final String passName;
-  final int ticketsNumber;
+  final String? passName;
+  final int? ticketsNumber;
   final DateTime today;
   final DateTime pickedDate;
   final DateTime passValidity;
