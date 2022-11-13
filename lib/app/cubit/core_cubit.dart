@@ -15,11 +15,14 @@ class CoreCubit extends Cubit<CoreState> {
         ));
 
   Future<void> setDefault() async {
-    emit(state.copyWith(
-        pickedDate: state.today,
-        passName: null,
-        ticketsNumber: null,
-        monthPickerValue: 6));
+    emit(CoreState(
+      today: DateTime.now(),
+      pickedDate: DateTime.now(),
+      monthPickerValue: 6,
+      passName: null,
+      ticketsNumber: null,
+      passValidity: DateTime.now(),
+    ));
   }
 
   Future<void> setPassValidity() async {
