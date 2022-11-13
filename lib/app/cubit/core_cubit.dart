@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'core_state.dart';
 
@@ -10,10 +9,18 @@ class CoreCubit extends Cubit<CoreState> {
           today: DateTime.now(),
           pickedDate: DateTime.now(),
           monthPickerValue: 6,
-          passName: '',
-          ticketsNumber: 0,
+          passName: null,
+          ticketsNumber: null,
           passValidity: DateTime.now(),
         ));
+
+  Future<void> setDefault() async {
+    emit(state.copyWith(
+        pickedDate: state.today,
+        passName: null,
+        ticketsNumber: null,
+        monthPickerValue: 6));
+  }
 
   Future<void> setPassValidity() async {
     var date = state.pickedDate;
