@@ -24,21 +24,12 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              UsageIndicator(
-                passName: 'ajnc',
-                tickets: 1,
-                passDate: '22.12.2022',
-                passRemainingTime: 'nie wiem',
-              )
+              // UsageIndicator(dataModel: ,)
             ],
           )),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.blueAccent,
             onPressed: (() {
-              print('stan passName: ${core.passName}');
-              print('stan ticketsy: ${core.ticketsNumber}');
-              print('stan month: ${core.monthPickerValue}');
-              print('stan date: ${core.pickedDate}');
               NDialog(
                 dialogStyle: DialogStyle(titleDivider: true),
                 title: const Text("NOWY KARNET"),
@@ -78,8 +69,6 @@ class HomePage extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).pop();
                       context.read<CoreCubit>().setDefault();
-                      print('stan close passName: ${core.passName}');
-                      print('stan close date: ${core.pickedDate}');
                     },
                     text: 'ODRZUĆ',
                     icon: const Icon(Icons.cancel_outlined),

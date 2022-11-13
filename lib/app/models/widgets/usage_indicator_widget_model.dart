@@ -1,18 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../data/usage_indicator_data_model.dart';
+
 class UsageIndicator extends StatelessWidget {
-  final String passName;
-  final int tickets;
-  final String passDate;
-  final String passRemainingTime;
+  final UsageIndicatorDataModel dataModel;
 
   const UsageIndicator({
     Key? key,
-    required this.passName,
-    required this.tickets,
-    required this.passDate,
-    required this.passRemainingTime,
+    required this.dataModel,
   }) : super(key: key);
 
   @override
@@ -26,7 +22,7 @@ class UsageIndicator extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              passName.toUpperCase(),
+              dataModel.passName.toUpperCase(),
               style: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -34,10 +30,10 @@ class UsageIndicator extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'WAŻNY DO: $passDate',
+                  'WAŻNY DO: ${dataModel.passDate}',
                   style: const TextStyle(color: Colors.white),
                 ),
-                Text('POZOSTAŁO: $passRemainingTime',
+                Text('POZOSTAŁO: ${dataModel.passRemainingTime}',
                     style: const TextStyle(color: Colors.white))
               ],
             ),
@@ -46,7 +42,7 @@ class UsageIndicator extends StatelessWidget {
               spacing: 5,
               runSpacing: 5,
               children: [
-                for (int ticket = 1; ticket <= tickets; ticket++)
+                for (int ticket = 1; ticket <= dataModel.tickets; ticket++)
                   Ticket(
                     number: ticket.toString(),
                   )

@@ -56,7 +56,7 @@ class CoreCubit extends Cubit<CoreState> {
         lastDate: _lastDate,
         locale: const Locale('pl'));
 
-    if (_pickedDate != null && _pickedDate != _date) {
+    if (_pickedDate != null && _pickedDate != state.pickedDate) {
       emit(state.copyWith(pickedDate: _pickedDate));
     }
   }
