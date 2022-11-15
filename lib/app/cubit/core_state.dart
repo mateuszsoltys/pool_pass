@@ -3,6 +3,7 @@ part of 'core_cubit.dart';
 
 @immutable
 class CoreState {
+  final String dataBoxname;
   final String? passName;
   final int? ticketsNumber;
   final DateTime today;
@@ -11,6 +12,7 @@ class CoreState {
   final int monthPickerValue;
 
   CoreState({
+    required this.dataBoxname,
     required this.passName,
     required this.ticketsNumber,
     required this.today,
@@ -20,6 +22,7 @@ class CoreState {
   });
 
   CoreState copyWith({
+    String? dataBoxname,
     String? passName,
     int? ticketsNumber,
     DateTime? today,
@@ -28,6 +31,7 @@ class CoreState {
     int? monthPickerValue,
   }) {
     return CoreState(
+      dataBoxname: dataBoxname ?? this.dataBoxname,
       passName: passName ?? this.passName,
       ticketsNumber: ticketsNumber ?? this.ticketsNumber,
       today: today ?? this.today,

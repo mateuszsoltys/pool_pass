@@ -1,21 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:poolpass/core/database_boxes.dart';
 
 part 'core_state.dart';
 
 class CoreCubit extends Cubit<CoreState> {
   CoreCubit()
       : super(CoreState(
-          today: DateTime.now(),
-          pickedDate: DateTime.now(),
-          monthPickerValue: 6,
-          passName: null,
-          ticketsNumber: null,
-          passValidity: DateTime.now(),
-        ));
+            today: DateTime.now(),
+            pickedDate: DateTime.now(),
+            monthPickerValue: 6,
+            passName: null,
+            ticketsNumber: null,
+            passValidity: DateTime.now(),
+            dataBoxname: HiveBoxes.pass));
 
   Future<void> setDefault() async {
     emit(CoreState(
+      dataBoxname: HiveBoxes.pass,
       today: DateTime.now(),
       pickedDate: DateTime.now(),
       monthPickerValue: 6,
