@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:poolpass/core/database_boxes.dart';
+
+import '../models/data/pass_widget_data_model.dart';
 
 part 'core_state.dart';
 
@@ -60,6 +63,19 @@ class CoreCubit extends Cubit<CoreState> {
 
     if (_pickedDate != null && _pickedDate != state.pickedDate) {
       emit(state.copyWith(pickedDate: _pickedDate));
+    }
+  }
+
+  Future<void> saveData() async {
+    Box<PassWidgetDataModel> passBox =
+        Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
+    if (state.passName != null && state.ticketsNumber != null) {
+      passBox.add(PassWidgetDataModel(
+          passName: state.passName!,
+          ticketsNumber: state.ticketsNumber!,
+          passDate: state.passValidity));
+    } else {
+      null;
     }
   }
 }
