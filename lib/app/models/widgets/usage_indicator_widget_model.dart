@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
-import '../data/usage_indicator_data_model.dart';
+import 'package:poolpass/app/models/data/pass_widget_data_model.dart';
 
 class UsageIndicator extends StatelessWidget {
-  final UsageIndicatorDataModel dataModel;
+  final PassWidgetDataModel dataModel;
 
   const UsageIndicator({
     Key? key,
@@ -33,7 +32,7 @@ class UsageIndicator extends StatelessWidget {
                   'WAŻNY DO: ${dataModel.passDate}',
                   style: const TextStyle(color: Colors.white),
                 ),
-                Text('POZOSTAŁO: ${dataModel.passRemainingTime}',
+                Text('POZOSTAŁO: ??',
                     style: const TextStyle(color: Colors.white))
               ],
             ),
@@ -42,7 +41,9 @@ class UsageIndicator extends StatelessWidget {
               spacing: 5,
               runSpacing: 5,
               children: [
-                for (int ticket = 1; ticket <= dataModel.tickets; ticket++)
+                for (int ticket = 1;
+                    ticket <= dataModel.ticketsNumber;
+                    ticket++)
                   Ticket(
                     number: ticket.toString(),
                   )

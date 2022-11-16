@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -16,7 +18,8 @@ class CoreCubit extends Cubit<CoreState> {
             passName: null,
             ticketsNumber: null,
             passValidity: DateTime.now(),
-            dataBoxname: HiveBoxes.pass));
+            dataBoxname: HiveBoxes.pass,
+            passBoxDatas: []));
 
   Future<void> setDefault() async {
     emit(CoreState(
@@ -27,6 +30,7 @@ class CoreCubit extends Cubit<CoreState> {
       passName: null,
       ticketsNumber: null,
       passValidity: DateTime.now(),
+      passBoxDatas: [],
     ));
   }
 
@@ -66,16 +70,37 @@ class CoreCubit extends Cubit<CoreState> {
     }
   }
 
-  Future<void> saveData() async {
+  Future<void> saveData(BuildContext context) async {
     Box<PassWidgetDataModel> passBox =
         Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
+    setPassValidity();
     if (state.passName != null && state.ticketsNumber != null) {
-      passBox.add(PassWidgetDataModel(
+      await passBox.add(PassWidgetDataModel(
           passName: state.passName!,
           ticketsNumber: state.ticketsNumber!,
           passDate: state.passValidity));
+      setDefault();
+      Navigator.of(context).pop();
     } else {
       null;
     }
+  }
+
+  Future<List<PassWidgetDataModel>?> readPassBox() async {
+    Box<PassWidgetDataModel> passBox =
+        Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
+    final passDatas = await passBox.values.map((e) {
+      return PassWidgetDataModel(
+          passName: e.passName,
+          ticketsNumber: e.ticketsNumber,
+          passDate: e.passDate);
+    }).toList();
+    emit(state.copyWith(passBoxDatas: passDatas));
+  }
+
+  Future<void> start() async {
+    //todo: show saved passes
+
+    // emit();
   }
 }

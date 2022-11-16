@@ -1,18 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:poolpass/app/cubit/core_cubit.dart';
 import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
 import 'package:poolpass/app/models/widgets/usage_indicator_widget_model.dart';
 
+import '../../../../core/database_boxes.dart';
+import '../../../models/data/pass_widget_data_model.dart';
 import '../../../models/widgets/new_pass_input_widget_model.dart';
 import '../../../models/widgets/take_date_widget_model.dart';
 import '../../../models/widgets/take_validity_widget_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  HomePage({Key? key}) : super(key: key);
+  final Box<PassWidgetDataModel> passBox =
+      Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CoreCubit, CoreState>(
@@ -24,7 +28,13 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              // UsageIndicator(dataModel: ,)
+              IconButton(
+                  onPressed: () {
+                    context.read<CoreCubit>().readPassBox();
+                  },
+                  icon: Icon(Icons.question_mark)),
+              for (final passData in core.passBoxDatas)
+                UsageIndicator(dataModel: passData),
             ],
           )),
           floatingActionButton: FloatingActionButton(
@@ -78,7 +88,9 @@ class HomePage extends StatelessWidget {
                         const BorderRadius.only(topLeft: Radius.circular(10)),
                     margin: const EdgeInsets.only(left: 5),
                     color: Colors.green,
-                    onTap: () {},
+                    onTap: () {
+                      context.read<CoreCubit>().saveData(context);
+                    },
                     text: 'DODAJ',
                     icon: const Icon(Icons.add),
                   ),

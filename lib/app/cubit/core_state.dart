@@ -10,6 +10,7 @@ class CoreState {
   final DateTime pickedDate;
   final DateTime passValidity;
   final int monthPickerValue;
+  final List<PassWidgetDataModel> passBoxDatas;
 
   CoreState({
     required this.dataBoxname,
@@ -19,6 +20,7 @@ class CoreState {
     required this.pickedDate,
     required this.passValidity,
     required this.monthPickerValue,
+    required this.passBoxDatas,
   });
 
   CoreState copyWith({
@@ -29,6 +31,7 @@ class CoreState {
     DateTime? pickedDate,
     DateTime? passValidity,
     int? monthPickerValue,
+    List<PassWidgetDataModel>? passBoxDatas,
   }) {
     return CoreState(
       dataBoxname: dataBoxname ?? this.dataBoxname,
@@ -38,6 +41,7 @@ class CoreState {
       pickedDate: pickedDate ?? this.pickedDate,
       passValidity: passValidity ?? this.passValidity,
       monthPickerValue: monthPickerValue ?? this.monthPickerValue,
+      passBoxDatas: passBoxDatas ?? this.passBoxDatas,
     );
   }
 }
