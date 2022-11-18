@@ -17,4 +17,16 @@ class PassWidgetDataModel extends HiveObject {
     required this.ticketsNumber,
     required this.passDate,
   });
+
+  PassWidgetDataModel copyWith({
+    String? passName,
+    int? ticketsNumber,
+    DateTime? passDate,
+  }) {
+    return PassWidgetDataModel(
+      passName: passName ?? this.passName,
+      ticketsNumber: ticketsNumber ?? this.ticketsNumber,
+      passDate: passDate ?? this.passDate,
+    );
+  }
 }

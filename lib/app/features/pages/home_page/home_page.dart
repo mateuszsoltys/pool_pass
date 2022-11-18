@@ -31,11 +31,13 @@ class HomePage extends StatelessWidget {
               ),
               for (final passData in core.passBoxDatas)
                 Slidable(
-                  startActionPane: const ActionPane(
+                  startActionPane: ActionPane(
                     motion: BehindMotion(),
                     children: [
                       SlidableAction(
-                          onPressed: null,
+                          onPressed: (cotext) {
+                            context.read<CoreCubit>().substractTicket(passData);
+                          },
                           label: 'WEJŚCIE',
                           icon: Ionicons.ticket,
                           backgroundColor: Colors.transparent)
