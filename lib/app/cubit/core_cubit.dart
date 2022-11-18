@@ -119,4 +119,10 @@ class CoreCubit extends Cubit<CoreState> {
   Future<void> start() async {
     readPassBox();
   }
+
+  // Future<void> substractTicket(int tickets) async {
+  //   Box<PassWidgetDataModel> passBox =
+  //       Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
+  //   int _newValTickets = tickets - 1;
+  // }
 }
