@@ -32,6 +32,7 @@ class CoreCubit extends Cubit<CoreState> {
       passValidity: DateTime.now(),
       passBoxDatas: [],
     ));
+    readPassBox();
   }
 
   Future<void> setPassValidity() async {
@@ -113,5 +114,9 @@ class CoreCubit extends Cubit<CoreState> {
       return 'PO TERMINIE';
     }
     return '';
+  }
+
+  Future<void> start() async {
+    readPassBox();
   }
 }

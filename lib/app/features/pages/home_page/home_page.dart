@@ -28,11 +28,6 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              IconButton(
-                  onPressed: () {
-                    context.read<CoreCubit>().readPassBox();
-                  },
-                  icon: Icon(Icons.question_mark)),
               for (final passData in core.passBoxDatas)
                 UsageIndicator(
                   dataModel: passData,

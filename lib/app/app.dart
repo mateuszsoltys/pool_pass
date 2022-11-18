@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CoreCubit(),
+      create: (context) => CoreCubit()..start(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
