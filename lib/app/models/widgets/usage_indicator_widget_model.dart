@@ -1,20 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:poolpass/app/models/data/pass_widget_data_model.dart';
 
 class UsageIndicator extends StatelessWidget {
   final PassWidgetDataModel dataModel;
+  final String daysLeft;
 
   const UsageIndicator({
     Key? key,
     required this.dataModel,
+    required this.daysLeft,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String formattedDate =
+        DateFormat('dd-MM-yyyy').format(dataModel.passDate);
     return Container(
         width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.only(left: 20, right: 20),
+        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
         decoration: const BoxDecoration(
             color: Color.fromARGB(141, 19, 55, 255),
             borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -28,12 +34,30 @@ class UsageIndicator extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'WAŻNY DO: ${dataModel.passDate}',
-                  style: const TextStyle(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Column(children: [
+                    const Text(
+                      'WAŻNY DO:',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      formattedDate,
+                      style: const TextStyle(color: Colors.white),
+                    )
+                  ]),
                 ),
-                Text('POZOSTAŁO: ??',
-                    style: const TextStyle(color: Colors.white))
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Column(
+                    children: [
+                      const Text('POZOSTAŁO DNI:',
+                          style: TextStyle(color: Colors.white)),
+                      Text(daysLeft,
+                          style: const TextStyle(color: Colors.white))
+                    ],
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 5),

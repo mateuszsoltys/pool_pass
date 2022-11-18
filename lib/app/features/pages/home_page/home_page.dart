@@ -34,7 +34,11 @@ class HomePage extends StatelessWidget {
                   },
                   icon: Icon(Icons.question_mark)),
               for (final passData in core.passBoxDatas)
-                UsageIndicator(dataModel: passData),
+                UsageIndicator(
+                  dataModel: passData,
+                  daysLeft:
+                      context.read<CoreCubit>().setDaysLeft(passData.passDate),
+                ),
             ],
           )),
           floatingActionButton: FloatingActionButton(

@@ -98,9 +98,20 @@ class CoreCubit extends Cubit<CoreState> {
     emit(state.copyWith(passBoxDatas: passDatas));
   }
 
-  Future<void> start() async {
-    //todo: show saved passes
-
-    // emit();
+  String setDaysLeft(DateTime passDate) {
+    DateTime _today = state.today;
+    int _daysLeft = DateUtils.dateOnly(passDate)
+        .difference(DateUtils.dateOnly(_today))
+        .inDays;
+    if (_daysLeft > 0) {
+      return _daysLeft.toString();
+    }
+    if (_daysLeft == 0) {
+      return 'DZISIAJ!';
+    }
+    if (_daysLeft < 0) {
+      return 'PO TERMINIE';
+    }
+    return '';
   }
 }
