@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CoreCubit, CoreState>(
       builder: (context, core) {
+        List<PassWidgetDataModel> widgetsList = core.passBoxDatas;
         return Scaffold(
           body: Center(
               child: ListView(
@@ -29,14 +30,16 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              for (final passData in core.passBoxDatas)
+              for (int index = 0; index < widgetsList.length; index++)
                 Slidable(
                   startActionPane: ActionPane(
-                    motion: BehindMotion(),
+                    motion: const BehindMotion(),
                     children: [
                       SlidableAction(
                           onPressed: (cotext) {
-                            context.read<CoreCubit>().substractTicket(passData);
+                            context
+                                .read<CoreCubit>()
+                                .substractTicket(widgetsList[index], index);
                           },
                           label: 'WEJŚCIE',
                           icon: Ionicons.ticket,
@@ -44,19 +47,21 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   endActionPane:
-                      const ActionPane(motion: BehindMotion(), children: [
+                      ActionPane(motion: const BehindMotion(), children: [
                     SlidableAction(
-                      onPressed: null,
+                      onPressed: (context) {
+                        context.read<CoreCubit>().deletePass(index);
+                      },
                       icon: Ionicons.trash,
                       label: 'USUŃ KARNET',
                       backgroundColor: Colors.transparent,
                     )
                   ]),
                   child: UsageIndicator(
-                    dataModel: passData,
+                    dataModel: widgetsList[index],
                     daysLeft: context
                         .read<CoreCubit>()
-                        .setDaysLeft(passData.passDate),
+                        .setDaysLeft(widgetsList[index].passDate),
                   ),
                 ),
             ],

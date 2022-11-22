@@ -88,14 +88,17 @@ class CoreCubit extends Cubit<CoreState> {
   }
 
   Future<List<PassWidgetDataModel>?> readPassBox() async {
+    int index = 0;
     Box<PassWidgetDataModel> passBox =
         Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
     final passDatas = await passBox.values.map((e) {
+      index++;
       return PassWidgetDataModel(
           passName: e.passName,
           ticketsNumber: e.ticketsNumber,
           passDate: e.passDate);
     }).toList();
+
     emit(state.copyWith(passBoxDatas: passDatas));
   }
 
@@ -120,18 +123,27 @@ class CoreCubit extends Cubit<CoreState> {
     readPassBox();
   }
 
-  Future<void> substractTicket(PassWidgetDataModel data) async {
+  Future<void> substractTicket(PassWidgetDataModel data, int index) async {
     Box<PassWidgetDataModel> passBox =
         Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
-    final key = data.key;
     int _newValTickets = data.ticketsNumber - 1;
 
     passBox.putAt(
-        key,
+        index,
         PassWidgetDataModel(
             passName: data.passName,
             ticketsNumber: _newValTickets,
             passDate: data.passDate));
+    if (_newValTickets == 0) {
+      deletePass(index);
+    }
+    readPassBox();
+  }
+
+  Future<void> deletePass(int index) async {
+    Box<PassWidgetDataModel> passBox =
+        Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
+    passBox.deleteAt(index);
     readPassBox();
   }
 }
