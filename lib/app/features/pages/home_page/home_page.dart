@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ndialog/ndialog.dart';
@@ -56,6 +57,7 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     NewPassInputWidget(
+                      format: FilteringTextInputFormatter.singleLineFormatter,
                       initialValue: core.passName ?? '',
                       onChanged: context.read<CoreCubit>().setPassName,
                       label: 'nazwa',
@@ -63,6 +65,7 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     NewPassInputWidget(
+                        format: FilteringTextInputFormatter.digitsOnly,
                         initialValue: core.ticketsNumber == null
                             ? ''
                             : core.ticketsNumber.toString(),
