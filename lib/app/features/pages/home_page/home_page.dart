@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:poolpass/app/cubit/core_cubit.dart';
 import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
@@ -31,38 +29,14 @@ class HomePage extends StatelessWidget {
                 height: 20,
               ),
               for (int index = 0; index < widgetsList.length; index++)
-                Slidable(
-                  startActionPane: ActionPane(
-                    motion: const BehindMotion(),
-                    children: [
-                      SlidableAction(
-                          onPressed: (cotext) {
-                            context
-                                .read<CoreCubit>()
-                                .substractTicket(widgetsList[index], index);
-                          },
-                          label: 'WEJŚCIE',
-                          icon: Ionicons.ticket,
-                          backgroundColor: Colors.transparent)
-                    ],
-                  ),
-                  endActionPane:
-                      ActionPane(motion: const BehindMotion(), children: [
-                    SlidableAction(
-                      onPressed: (context) {
-                        context.read<CoreCubit>().deletePass(index);
-                      },
-                      icon: Ionicons.trash,
-                      label: 'USUŃ KARNET',
-                      backgroundColor: Colors.transparent,
-                    )
-                  ]),
-                  child: UsageIndicator(
-                    dataModel: widgetsList[index],
-                    daysLeft: context
-                        .read<CoreCubit>()
-                        .setDaysLeft(widgetsList[index].passDate),
-                  ),
+                UsageIndicator(
+                  substractFunction: context.read<CoreCubit>().substractTicket,
+                  deleteFunction: context.read<CoreCubit>().deletePass,
+                  index: index,
+                  dataModel: widgetsList[index],
+                  daysLeft: context
+                      .read<CoreCubit>()
+                      .setDaysLeft(widgetsList[index].passDate),
                 ),
             ],
           )),
