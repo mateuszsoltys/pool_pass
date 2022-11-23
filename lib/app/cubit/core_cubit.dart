@@ -86,11 +86,9 @@ class CoreCubit extends Cubit<CoreState> {
   }
 
   Future<List<PassWidgetDataModel>?> readPassBox() async {
-    int index = 0;
     Box<PassWidgetDataModel> passBox =
         Hive.box<PassWidgetDataModel>(HiveBoxes.pass);
     final passDatas = await passBox.values.map((e) {
-      index++;
       return PassWidgetDataModel(
           passName: e.passName,
           ticketsNumber: e.ticketsNumber,

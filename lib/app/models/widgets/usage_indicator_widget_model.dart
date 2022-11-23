@@ -36,6 +36,7 @@ class UsageIndicator extends StatelessWidget {
               },
               label: 'WEJŚCIE',
               icon: Ionicons.ticket,
+              foregroundColor: Colors.amber,
               backgroundColor: Colors.transparent)
         ],
       ),
@@ -47,6 +48,7 @@ class UsageIndicator extends StatelessWidget {
           icon: Ionicons.trash,
           label: 'USUŃ KARNET',
           backgroundColor: Colors.transparent,
+          foregroundColor: Color.fromARGB(255, 255, 72, 59),
         )
       ]),
       child: Container(

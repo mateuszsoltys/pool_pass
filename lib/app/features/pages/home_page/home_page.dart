@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:poolpass/app/cubit/core_cubit.dart';
 import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
+import 'package:poolpass/app/models/widgets/empty_info_widget_model.dart';
 import 'package:poolpass/app/models/widgets/usage_indicator_widget_model.dart';
 
 import '../../../../core/database_boxes.dart';
@@ -20,26 +21,31 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CoreCubit, CoreState>(
       builder: (context, core) {
-        List<PassWidgetDataModel> widgetsList = core.passBoxDatas;
         return Scaffold(
           body: Center(
-              child: ListView(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              for (int index = 0; index < widgetsList.length; index++)
-                UsageIndicator(
-                  substractFunction: context.read<CoreCubit>().substractTicket,
-                  deleteFunction: context.read<CoreCubit>().deletePass,
-                  index: index,
-                  dataModel: widgetsList[index],
-                  daysLeft: context
-                      .read<CoreCubit>()
-                      .setDaysLeft(widgetsList[index].passDate),
-                ),
-            ],
-          )),
+              child: core.passBoxDatas.isNotEmpty
+                  ? ListView(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        for (int index = 0;
+                            index < core.passBoxDatas.length;
+                            index++)
+                          UsageIndicator(
+                            substractFunction:
+                                context.read<CoreCubit>().substractTicket,
+                            deleteFunction:
+                                context.read<CoreCubit>().deletePass,
+                            index: index,
+                            dataModel: core.passBoxDatas[index],
+                            daysLeft: context
+                                .read<CoreCubit>()
+                                .setDaysLeft(core.passBoxDatas[index].passDate),
+                          )
+                      ],
+                    )
+                  : const EmptyInfoWidget()),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.blueAccent,
             onPressed: (() {
