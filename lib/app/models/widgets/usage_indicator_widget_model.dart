@@ -46,48 +46,52 @@ class UsageIndicator extends StatelessWidget {
       endActionPane: ActionPane(motion: const BehindMotion(), children: [
         SlidableAction(
           onPressed: (context) {
-            NDialog(
-              dialogStyle: DialogStyle(titleDivider: true),
-              title: const Text("USUWANIE KARNETU"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Próbujesz usunąć karnet: ${dataModel.passName}'),
-                  const SizedBox(height: 5),
-                  const Text('Tej operacji nie będzie można cofnąć')
-                ],
-              ),
-              actions: <Widget>[
-                DialogButtonWidget(
-                  borderRadius:
-                      const BorderRadius.only(topRight: Radius.circular(10)),
-                  margin: const EdgeInsets.only(right: 5),
-                  color: Colors.blue,
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  text: 'ODRZUĆ',
-                  icon: const Icon(Icons.cancel_outlined),
-                ),
-                DialogButtonWidget(
-                  borderRadius:
-                      const BorderRadius.only(topLeft: Radius.circular(10)),
-                  margin: const EdgeInsets.only(left: 5),
-                  color: Colors.red,
-                  onTap: () {
-                    deleteFunction.call(index);
-                    Navigator.of(context).pop();
-                  },
-                  text: 'USUŃ',
-                  icon: const Icon(Icons.add),
-                ),
-              ],
-            ).show(context);
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return NDialog(
+                    dialogStyle: DialogStyle(titleDivider: true),
+                    title: const Text("USUWANIE KARNETU"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Próbujesz usunąć karnet: ${dataModel.passName}'),
+                        const SizedBox(height: 5),
+                        const Text('Tej operacji nie będzie można cofnąć')
+                      ],
+                    ),
+                    actions: <Widget>[
+                      DialogButtonWidget(
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(10)),
+                        margin: const EdgeInsets.only(right: 5),
+                        color: Colors.blue,
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        text: 'ODRZUĆ',
+                        icon: const Icon(Icons.cancel_outlined),
+                      ),
+                      DialogButtonWidget(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10)),
+                        margin: const EdgeInsets.only(left: 5),
+                        color: Colors.red,
+                        onTap: () {
+                          deleteFunction.call(index);
+                          Navigator.of(context).pop();
+                        },
+                        text: 'USUŃ',
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  );
+                });
           },
           icon: Ionicons.trash,
           label: 'USUŃ KARNET',
           backgroundColor: Colors.transparent,
-          foregroundColor: Color.fromARGB(255, 255, 72, 59),
+          foregroundColor: const Color.fromARGB(255, 255, 72, 59),
         )
       ]),
       child: Container(
