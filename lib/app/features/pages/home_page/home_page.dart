@@ -8,6 +8,7 @@ import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
 import 'package:poolpass/app/models/widgets/empty_info_widget_model.dart';
 import 'package:poolpass/app/models/widgets/usage_indicator_widget_model.dart';
 
+import '../../../../core/custom_text_input_formatter.dart';
 import '../../../../core/database_boxes.dart';
 import '../../../models/data/pass_widget_data_model.dart';
 import '../../../models/widgets/new_pass_input_widget_model.dart';
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     NewPassInputWidget(
-                      format: FilteringTextInputFormatter.singleLineFormatter,
+                      format: [LengthLimitingTextInputFormatter(20)],
                       initialValue: core.passName ?? '',
                       onChanged: context.read<CoreCubit>().setPassName,
                       label: 'nazwa',
@@ -65,13 +66,16 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     NewPassInputWidget(
-                        format: FilteringTextInputFormatter.digitsOnly,
+                        format: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          NumericalRangeFormatter(min: 1, max: 60)
+                        ],
                         initialValue: core.ticketsNumber == null
                             ? ''
                             : core.ticketsNumber.toString(),
                         onChanged:
                             context.read<CoreCubit>().setPassNumberTickets,
-                        label: 'ilość wejść',
+                        label: 'ilość wejść (1-60)',
                         keyboardType: TextInputType.number),
                     const SizedBox(height: 2),
                     TakeDateWidget(

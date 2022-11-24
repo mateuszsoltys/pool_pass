@@ -10,7 +10,7 @@ class NewPassInputWidget extends StatelessWidget {
   final TextInputType keyboardType;
   final Function onChanged;
   final String initialValue;
-  final TextInputFormatter format;
+  final List<TextInputFormatter>? format;
   NewPassInputWidget({
     Key? key,
     required this.label,
@@ -27,7 +27,7 @@ class NewPassInputWidget extends StatelessWidget {
         return SizedBox(
           width: 200,
           child: TextFormField(
-            inputFormatters: [format],
+            inputFormatters: format,
             initialValue: initialValue,
             onChanged: (val) {
               onChanged.call(val);
