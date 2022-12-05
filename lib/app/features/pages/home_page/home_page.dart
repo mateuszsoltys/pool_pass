@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:poolpass/app/cubit/core_cubit.dart';
 import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
@@ -97,7 +98,7 @@ class HomePage extends StatelessWidget {
                       context.read<CoreCubit>().setDefault();
                     },
                     text: 'ODRZUĆ',
-                    icon: const Icon(Icons.cancel_outlined),
+                    icon: const Icon(Ionicons.close_circle_outline),
                   ),
                   DialogButtonWidget(
                     borderRadius:
@@ -108,7 +109,7 @@ class HomePage extends StatelessWidget {
                       context.read<CoreCubit>().saveData(context);
                     },
                     text: 'DODAJ',
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Ionicons.add_circle_outline),
                   ),
                 ],
               ).show(context);
