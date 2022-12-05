@@ -70,7 +70,7 @@ class UsageIndicator extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         text: 'ODRZUĆ',
-                        icon: const Icon(Icons.cancel_outlined),
+                        icon: const Icon(Ionicons.close_circle_outline),
                       ),
                       DialogButtonWidget(
                         borderRadius: const BorderRadius.only(
@@ -82,7 +82,7 @@ class UsageIndicator extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         text: 'USUŃ',
-                        icon: const Icon(Icons.add),
+                        icon: const Icon(Ionicons.alert_circle_outline),
                       ),
                     ],
                   );
