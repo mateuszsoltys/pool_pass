@@ -49,7 +49,7 @@ class CoreCubit extends Cubit<CoreState> {
   }
 
   Future<void> setPassNumberTickets(val) async {
-    int? _nuberTickets = (val ?? '').isEmpty ? null : int.parse(val);
+    int? _nuberTickets = val.isEmpty ? null : int.parse(val);
     emit(state.copyWith(ticketsNumber: _nuberTickets));
   }
 
