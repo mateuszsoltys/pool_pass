@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:ndialog/ndialog.dart';
 
 import 'package:poolpass/app/models/data/pass_widget_data_model.dart';
+
+import 'dialog_button_widget_model.dart';
 
 class UsageIndicator extends StatelessWidget {
   final PassWidgetDataModel dataModel;
@@ -43,12 +46,52 @@ class UsageIndicator extends StatelessWidget {
       endActionPane: ActionPane(motion: const BehindMotion(), children: [
         SlidableAction(
           onPressed: (context) {
-            deleteFunction.call(index);
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return NDialog(
+                    dialogStyle: DialogStyle(titleDivider: true),
+                    title: const Text("USUWANIE KARNETU"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Próbujesz usunąć karnet: ${dataModel.passName}'),
+                        const SizedBox(height: 5),
+                        const Text('Tej operacji nie będzie można cofnąć')
+                      ],
+                    ),
+                    actions: <Widget>[
+                      DialogButtonWidget(
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(10)),
+                        margin: const EdgeInsets.only(right: 5),
+                        color: Colors.blue,
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        text: 'ODRZUĆ',
+                        icon: const Icon(Ionicons.close_circle_outline),
+                      ),
+                      DialogButtonWidget(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10)),
+                        margin: const EdgeInsets.only(left: 5),
+                        color: Colors.red,
+                        onTap: () {
+                          deleteFunction.call(index);
+                          Navigator.of(context).pop();
+                        },
+                        text: 'USUŃ',
+                        icon: const Icon(Ionicons.alert_circle_outline),
+                      ),
+                    ],
+                  );
+                });
           },
           icon: Ionicons.trash,
           label: 'USUŃ KARNET',
           backgroundColor: Colors.transparent,
-          foregroundColor: Color.fromARGB(255, 255, 72, 59),
+          foregroundColor: const Color.fromARGB(255, 255, 72, 59),
         )
       ]),
       child: Container(

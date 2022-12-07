@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:poolpass/app/cubit/core_cubit.dart';
 import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
 import 'package:poolpass/app/models/widgets/empty_info_widget_model.dart';
 import 'package:poolpass/app/models/widgets/usage_indicator_widget_model.dart';
 
+import '../../../../core/custom_text_input_formatter.dart';
 import '../../../../core/database_boxes.dart';
 import '../../../models/data/pass_widget_data_model.dart';
 import '../../../models/widgets/new_pass_input_widget_model.dart';
@@ -56,6 +59,7 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     NewPassInputWidget(
+                      format: [LengthLimitingTextInputFormatter(20)],
                       initialValue: core.passName ?? '',
                       onChanged: context.read<CoreCubit>().setPassName,
                       label: 'nazwa',
@@ -63,12 +67,16 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     NewPassInputWidget(
+                        format: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          NumericalRangeFormatter(min: 1, max: 60)
+                        ],
                         initialValue: core.ticketsNumber == null
                             ? ''
                             : core.ticketsNumber.toString(),
                         onChanged:
                             context.read<CoreCubit>().setPassNumberTickets,
-                        label: 'ilość wejść',
+                        label: 'ilość wejść (1-60)',
                         keyboardType: TextInputType.number),
                     const SizedBox(height: 2),
                     TakeDateWidget(
@@ -90,7 +98,7 @@ class HomePage extends StatelessWidget {
                       context.read<CoreCubit>().setDefault();
                     },
                     text: 'ODRZUĆ',
-                    icon: const Icon(Icons.cancel_outlined),
+                    icon: const Icon(Ionicons.close_circle_outline),
                   ),
                   DialogButtonWidget(
                     borderRadius:
@@ -101,7 +109,7 @@ class HomePage extends StatelessWidget {
                       context.read<CoreCubit>().saveData(context);
                     },
                     text: 'DODAJ',
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Ionicons.add_circle_outline),
                   ),
                 ],
               ).show(context);
