@@ -1,6 +1,6 @@
 - Dodawanie własnych, predefiniowanych karnetów
 - Karnet po terminie:
-    - zmiana wyglądu widgetu karnetu
+    - zmiana wyglądu widgetu karnetu @done
     - blokada odjęcia biletu
 - Przemyśleć interfejs aplikacji
 - zmiana nazwy projektu
