@@ -34,16 +34,10 @@ class UsageIndicator extends StatelessWidget {
         DateFormat('dd-MM-yyyy').format(dataModel.passDate);
     return Slidable(
       startActionPane: ActionPane(
+        extentRatio: _expired ? 0.0000000000000000000000000000001 : 0.5,
         motion: const BehindMotion(),
         children: [
-          SlidableAction(
-              onPressed: (cotext) {
-                substractFunction.call(dataModel, index);
-              },
-              label: 'WEJŚCIE',
-              icon: Ionicons.ticket,
-              foregroundColor: Colors.amber,
-              backgroundColor: Colors.transparent)
+          if (_expired) ...[] else ...[_rightSlide()],
         ],
       ),
       endActionPane: ActionPane(motion: const BehindMotion(), children: [
@@ -150,6 +144,17 @@ class UsageIndicator extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  SlidableAction _rightSlide() {
+    return SlidableAction(
+        onPressed: (cotext) {
+          substractFunction.call(dataModel, index);
+        },
+        label: 'WEJŚCIE',
+        icon: Ionicons.ticket,
+        foregroundColor: Colors.amber,
+        backgroundColor: Colors.transparent);
   }
 }
 
