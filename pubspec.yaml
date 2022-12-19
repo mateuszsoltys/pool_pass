@@ -44,7 +44,12 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.3.2
   hive_generator: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/pass_app_icon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
