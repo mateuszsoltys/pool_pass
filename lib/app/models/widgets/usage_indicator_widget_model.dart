@@ -6,6 +6,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
 
 import 'package:poolpass/app/models/data/pass_widget_data_model.dart';
+import 'package:poolpass/core/theme.dart';
 
 import 'dialog_button_widget_model.dart';
 
@@ -27,20 +28,16 @@ class UsageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _expired = daysLeft == 'PO TERMINIE' ? true : false;
+    CustomTheme _theme = CustomTheme();
     final String formattedDate =
         DateFormat('dd-MM-yyyy').format(dataModel.passDate);
     return Slidable(
       startActionPane: ActionPane(
+        extentRatio: _expired ? 0.0000000000000000000000000000001 : 0.5,
         motion: const BehindMotion(),
         children: [
-          SlidableAction(
-              onPressed: (cotext) {
-                substractFunction.call(dataModel, index);
-              },
-              label: 'WEJŚCIE',
-              icon: Ionicons.ticket,
-              foregroundColor: Colors.amber,
-              backgroundColor: Colors.transparent)
+          if (_expired) ...[] else ...[_rightSlide()],
         ],
       ),
       endActionPane: ActionPane(motion: const BehindMotion(), children: [
@@ -97,15 +94,17 @@ class UsageIndicator extends StatelessWidget {
       child: Container(
           width: MediaQuery.of(context).size.width,
           margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-          decoration: const BoxDecoration(
-              color: Color.fromARGB(141, 19, 55, 255),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+          decoration: BoxDecoration(
+              color: _expired
+                  ? _theme.expiredWidgetColor
+                  : _theme.regularWidgetColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           child: Column(
             children: [
-              Text(
-                dataModel.passName.toUpperCase(),
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+              CustomText(
+                text: dataModel.passName,
+                expired: _expired,
+                fontWeight: FontWeight.bold,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,24 +112,16 @@ class UsageIndicator extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Column(children: [
-                      const Text(
-                        'WAŻNY DO:',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        formattedDate,
-                        style: const TextStyle(color: Colors.white),
-                      )
+                      CustomText(text: 'ważny do:', expired: _expired),
+                      CustomText(text: formattedDate, expired: _expired)
                     ]),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 5),
                     child: Column(
                       children: [
-                        const Text('POZOSTAŁO DNI:',
-                            style: TextStyle(color: Colors.white)),
-                        Text(daysLeft,
-                            style: const TextStyle(color: Colors.white))
+                        CustomText(text: 'pozostało dni:', expired: _expired),
+                        CustomText(text: daysLeft, expired: _expired)
                       ],
                     ),
                   )
@@ -145,6 +136,7 @@ class UsageIndicator extends StatelessWidget {
                       ticket <= dataModel.ticketsNumber;
                       ticket++)
                     Ticket(
+                      expired: _expired,
                       number: ticket.toString(),
                     )
                 ],
@@ -152,6 +144,34 @@ class UsageIndicator extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  SlidableAction _rightSlide() {
+    return SlidableAction(
+        onPressed: (cotext) {
+          substractFunction.call(dataModel, index);
+        },
+        label: 'WEJŚCIE',
+        icon: Ionicons.ticket,
+        foregroundColor: Colors.amber,
+        backgroundColor: Colors.transparent);
+  }
+}
+
+class CustomText extends StatelessWidget {
+  const CustomText(
+      {Key? key, required this.text, required this.expired, this.fontWeight})
+      : super(key: key);
+  final String text;
+  final bool expired;
+  final FontWeight? fontWeight;
+  @override
+  Widget build(BuildContext context) {
+    CustomTheme _theme = CustomTheme();
+    return Text(text.toUpperCase(),
+        style: TextStyle(
+            color: expired ? _theme.expiredTextColor : _theme.regularTextColor,
+            fontWeight: fontWeight));
   }
 }
 
@@ -161,22 +181,28 @@ class Ticket extends StatelessWidget {
   const Ticket({
     Key? key,
     required this.number,
+    required this.expired,
   }) : super(key: key);
-
+  final bool expired;
   @override
   Widget build(BuildContext context) {
+    CustomTheme _theme = CustomTheme();
     return Container(
       width: 30,
       height: 30,
-      decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 3, 0, 167),
-          borderRadius: BorderRadius.all(Radius.circular(5))),
+      decoration: BoxDecoration(
+          color:
+              expired ? _theme.expiredTicketColor : _theme.regularTicketColor,
+          borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: Align(
         alignment: Alignment.center,
         child: Text(
           number,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: expired
+                  ? _theme.expiredTicketTextColor
+                  : _theme.regularTicketTextColor),
         ),
       ),
     );
