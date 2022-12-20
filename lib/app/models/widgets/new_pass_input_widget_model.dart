@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:poolpass/app/cubit/core_cubit.dart';
 
@@ -35,12 +36,14 @@ class NewPassInputWidget extends StatelessWidget {
             keyboardType: keyboardType,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 3, color: Colors.blueAccent.shade700),
-                  borderRadius: BorderRadius.circular(10)),
-              labelText: label.toUpperCase(),
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 3, color: Colors.blueAccent.shade700),
+                    borderRadius: BorderRadius.circular(10)),
+                labelText: label.toUpperCase(),
+                labelStyle: TextStyle(
+                    fontFamily: GoogleFonts.ibmPlexMono().fontFamily,
+                    color: Colors.black)),
           ),
         );
       },

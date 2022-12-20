@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
@@ -48,13 +49,24 @@ class UsageIndicator extends StatelessWidget {
                 builder: (BuildContext context) {
                   return NDialog(
                     dialogStyle: DialogStyle(titleDivider: true),
-                    title: const Text("USUWANIE KARNETU"),
+                    title: Text("USUWANIE KARNETU",
+                        style: GoogleFonts.permanentMarker()),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Próbujesz usunąć karnet: ${dataModel.passName}'),
+                        const Icon(
+                          Ionicons.alert,
+                          color: Colors.red,
+                          size: 50,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text('Próbujesz usunąć karnet: ${dataModel.passName}',
+                            style: GoogleFonts.chakraPetch()),
                         const SizedBox(height: 5),
-                        const Text('Tej operacji nie będzie można cofnąć')
+                        Text('Tej operacji nie można cofnąć',
+                            style: GoogleFonts.chakraPetch(color: Colors.red))
                       ],
                     ),
                     actions: <Widget>[

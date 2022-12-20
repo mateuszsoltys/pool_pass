@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
@@ -52,40 +53,44 @@ class HomePage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.blueAccent,
             onPressed: (() {
+              double _distance = 8;
               NDialog(
                 dialogStyle: DialogStyle(titleDivider: true),
-                title: const Text("NOWY KARNET"),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    NewPassInputWidget(
-                      format: [LengthLimitingTextInputFormatter(20)],
-                      initialValue: core.passName ?? '',
-                      onChanged: context.read<CoreCubit>().setPassName,
-                      label: 'nazwa',
-                      keyboardType: TextInputType.text,
-                    ),
-                    const SizedBox(height: 2),
-                    NewPassInputWidget(
-                        format: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          NumericalRangeFormatter(min: 1, max: 60)
-                        ],
-                        initialValue: core.ticketsNumber == null
-                            ? ''
-                            : core.ticketsNumber.toString(),
-                        onChanged:
-                            context.read<CoreCubit>().setPassNumberTickets,
-                        label: 'ilość wejść (1-60)',
-                        keyboardType: TextInputType.number),
-                    const SizedBox(height: 2),
-                    TakeDateWidget(
-                        setDate: context.read<CoreCubit>().setNewDate),
-                    const SizedBox(height: 2),
-                    TakeValidityWidgetModel(
-                        onChanged:
-                            context.read<CoreCubit>().setMonthPickerValue)
-                  ],
+                title:
+                    Text("NOWY KARNET", style: GoogleFonts.permanentMarker()),
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      NewPassInputWidget(
+                        format: [LengthLimitingTextInputFormatter(20)],
+                        initialValue: core.passName ?? '',
+                        onChanged: context.read<CoreCubit>().setPassName,
+                        label: 'nazwa',
+                        keyboardType: TextInputType.text,
+                      ),
+                      SizedBox(height: _distance),
+                      NewPassInputWidget(
+                          format: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            NumericalRangeFormatter(min: 1, max: 60)
+                          ],
+                          initialValue: core.ticketsNumber == null
+                              ? ''
+                              : core.ticketsNumber.toString(),
+                          onChanged:
+                              context.read<CoreCubit>().setPassNumberTickets,
+                          label: 'ilość wejść (1-60)',
+                          keyboardType: TextInputType.number),
+                      SizedBox(height: _distance),
+                      TakeDateWidget(
+                          setDate: context.read<CoreCubit>().setNewDate),
+                      SizedBox(height: _distance),
+                      TakeValidityWidgetModel(
+                          onChanged:
+                              context.read<CoreCubit>().setMonthPickerValue)
+                    ],
+                  ),
                 ),
                 actions: <Widget>[
                   DialogButtonWidget(
