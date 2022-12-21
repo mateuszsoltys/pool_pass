@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:poolpass/core/database_boxes.dart';
+import 'package:pass_conrol/core/database_boxes.dart';
 
 import '../models/data/pass_widget_data_model.dart';
 

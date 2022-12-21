@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
-import 'package:poolpass/app/cubit/core_cubit.dart';
-import 'package:poolpass/app/models/widgets/dialog_button_widget_model.dart';
-import 'package:poolpass/app/models/widgets/empty_info_widget_model.dart';
-import 'package:poolpass/app/models/widgets/usage_indicator_widget_model.dart';
+import 'package:pass_conrol/app/cubit/core_cubit.dart';
+import 'package:pass_conrol/app/models/widgets/dialog_button_widget_model.dart';
+import 'package:pass_conrol/app/models/widgets/empty_info_widget_model.dart';
+import 'package:pass_conrol/app/models/widgets/usage_indicator_widget_model.dart';
 
 import '../../../../core/custom_text_input_formatter.dart';
 import '../../../../core/database_boxes.dart';

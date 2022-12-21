@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poolpass/app/cubit/core_cubit.dart';
-import 'package:poolpass/app/features/pages/home_page/home_page.dart';
+import 'package:pass_conrol/app/cubit/core_cubit.dart';
+import 'package:pass_conrol/app/features/pages/home_page/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {

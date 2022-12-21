@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:poolpass/app/cubit/core_cubit.dart';
+import 'package:pass_conrol/app/cubit/core_cubit.dart';
 
 class NewPassInputWidget extends StatelessWidget {
   final String label;

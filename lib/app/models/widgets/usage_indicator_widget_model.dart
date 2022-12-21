@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:ndialog/ndialog.dart';
 
-import 'package:poolpass/app/models/data/pass_widget_data_model.dart';
-import 'package:poolpass/core/theme.dart';
+import 'package:pass_conrol/app/models/data/pass_widget_data_model.dart';
+import 'package:pass_conrol/core/theme.dart';
 
 import 'dialog_button_widget_model.dart';
 

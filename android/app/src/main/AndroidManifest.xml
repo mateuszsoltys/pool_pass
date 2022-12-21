@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mateuszsoltys.poolpass">
+    package="com.mateuszsoltys.pass_conrol">
    <application
         android:label="Pass Control"
         android:name="${applicationName}"

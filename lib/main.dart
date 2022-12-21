@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:poolpass/app/app.dart';
-import 'package:poolpass/core/database_boxes.dart';
+import 'package:pass_conrol/app/app.dart';
+import 'package:pass_conrol/core/database_boxes.dart';
 
 import 'app/models/data/pass_widget_data_model.dart';
 

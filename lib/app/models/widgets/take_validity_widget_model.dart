@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:poolpass/app/cubit/core_cubit.dart';
+import 'package:pass_conrol/app/cubit/core_cubit.dart';
 
 class TakeValidityWidgetModel extends StatelessWidget {
   const TakeValidityWidgetModel({
